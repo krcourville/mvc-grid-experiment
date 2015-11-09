@@ -1,0 +1,43 @@
+﻿@using MvcTypescript.MvcWebClient.FormDesign
+@{
+    const int maxcolumns = 12;
+    var props = ViewData.ModelMetadata.Properties.ToList();
+    var grid = FormGrid.FromFormSectionMetadata(ViewData.ModelMetadata);
+}
+
+<div class="row at-formgrid">
+    <div class="col-sm-2 ">
+        <strong>@ViewData.ModelMetadata.DisplayName</strong>
+        @if (ViewData.ModelMetadata.AdditionalValues.ContainsKey(FormDesignValues.FormIconUrl))
+        {
+            <img class="img-responsive at-formgrid-section-icon" src="@Url.Content(ViewData.ModelMetadata.AdditionalValues[FormDesignValues.FormIconUrl].ToString())" alt="@ViewData.ModelMetadata.DisplayName Icon" />
+        }
+    </div>
+    <div class="col-sm-10">
+        @foreach (var row in grid.Rows)
+        {
+            <div class="row at-formgrid-row">
+                @{
+                    int cellcount = row.Cells.Count;
+                }
+                @foreach (var cell in row.Cells)
+                {
+                    int cellsize = maxcolumns / cellcount;
+                    int labelsize = cellsize / 6;
+                    int inputsize = cellsize - labelsize;
+
+                    <label class="col-sm-2 at-formgrid-label">
+                        @cell.LabelText
+                    </label>
+
+                    <div class="col-sm-4 at-formgrid-field-container">
+                    @if (cell.Meta != null && cell.PropertyName != null)
+                    {
+                        @Html.Editor(cell.PropertyName)
+                    }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

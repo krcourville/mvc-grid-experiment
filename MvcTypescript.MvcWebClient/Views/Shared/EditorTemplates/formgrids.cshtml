@@ -1,0 +1,13 @@
+﻿@using MvcTypescript.MvcWebClient.FormDesign
+@{
+    var formGrids = ViewData.ModelMetadata;
+    const int maxcolumns = 12;
+    var props = ViewData.ModelMetadata.Properties
+        .Where(p=>p.IsFormSection())
+        .ToList();
+}
+
+@foreach (var rootprop in props)
+{
+    @Html.Editor(rootprop.PropertyName,"formgrid")
+}

@@ -1,0 +1,54 @@
+@model object
+
+@functions{
+    public bool ShouldShow(ModelMetadata metadata)
+    {
+        var result = metadata.ShowForEdit
+            //&& metadata.ModelType != typeof(System.Data.EntityState)
+            //&& !metadata.IsComplexType
+            && !ViewData.TemplateInfo.Visited(metadata);
+        return result;
+    }
+}
+@*@ViewData.TemplateInfo.TemplateDepth
+    @if(ViewData.TemplateInfo.TemplateDepth > 1)
+    {
+        if(Model == null)
+        {
+            @ViewData.ModelMetadata.NullDisplayText;
+        }else {
+            @ViewData.ModelMetadata.SimpleDisplayText;
+        }
+    }
+    else
+    {*@
+
+@{var props = ViewData.ModelMetadata.Properties.Where(pm => ShouldShow(pm)).ToList(); }
+
+
+@for (int i = 0; i < props.Count; i++)
+{
+    var prop = props[i];    
+
+}
+
+@foreach (var prop in ViewData.ModelMetadata.Properties.Where(pm => ShouldShow(pm)))
+{
+    @Html.Editor(prop.PropertyName);
+    @*if(prop.HideSurroundingHtml)
+        {
+        } else
+        {
+            if (!string.IsNullOrEmpty(Html.Label(prop.PropertyName).ToHtmlString()))
+            {
+                <div class="editor-label">
+                    @Html.Label(prop.PropertyName)
+                </div>
+            }
+            <div class="editor-field">
+                @Html.Editor(prop.PropertyName)
+                @Html.ValidationMessage(prop.PropertyName, "*")
+            </div>
+        }*@
+}
+@*}*@

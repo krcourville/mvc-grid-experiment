@@ -1,0 +1,8 @@
+﻿{  
+  "compilerOptions": {
+    "outFile": "app.js",
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "commonjs"
+  }
+}

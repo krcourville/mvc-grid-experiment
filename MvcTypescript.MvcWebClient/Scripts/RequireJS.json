@@ -1,0 +1,26 @@
+﻿{
+  "paths": {
+    "jquery": "jquery-1.10.2"
+  },
+  "autoBundles": {
+    "main-app": {
+      "outputPath": "Scripts/Bundles",
+      "include": [
+        {
+          "directory": "Controllers/Root"
+        }
+      ]
+    },
+    "require-plugins": {
+      "outputPath": "Scripts/Bundles",
+      "include": [
+        {
+          "file": "Components/RequireJS/i18n"
+        },
+        {
+          "file": "Components/RequireJS/text"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@model Int32?
+
+<div class="form-group">
+    @Html.Label(ViewData.ModelMetadata.PropertyName,ViewData.ModelMetadata.DisplayName, new { @class= "col-sm-4 control-label" })
+    <div class="col-sm-6">
+        @Html.TextBox(ViewData.ModelMetadata.PropertyName, Model, new {@class="form-control" })
+        @Html.ValidationMessage(ViewData.ModelMetadata.PropertyName)
+    </div>
+</div>
